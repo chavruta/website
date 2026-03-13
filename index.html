@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light only">
+<title>חברותא — למידה מונעת AI לילדי ישראל | Chavruta</title>
+<meta name="description" content="יוזמת חינוך חירום קהילתית להחלפת מודל הזום הכושל בתגבור אישי מבוסס AI, חונכות עמיתים מובנית, והנחיית מורים. A community-driven emergency education initiative replacing failing Zoom learning with AI-powered tutoring, peer mentorship, and teacher mentoring.">
+<meta property="og:title" content="חברותא — למידה מונעת AI לילדי ישראל | Chavruta">
+<meta property="og:description" content="יוזמת חינוך חירום קהילתית: תגבור אישי מבוסס AI, חונכות עמיתים, והנחיית מורים — ניתן לפריסה מהירה, להרחבה ארצית.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="he_IL">
+<meta property="og:locale:alternate" content="en_US">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&family=Frank+Ruhl+Libre:wght@400;500;700&family=Heebo:wght@300;400;500;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A1628;
+    --blue: #1B4965;
+    --sky: #5FA8D3;
+    --gold: #CAA53D;
+    --cream: #FBF8F0;
+    --warm-gray: #6B7280;
+    --light-gray: #E8E4DC;
+    --white: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    color-scheme: light only;
+    background: #FBF8F0;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #FBF8F0;
+    color: var(--navy);
+    line-height: 1.7;
+  }
+
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--navy);
+    color: var(--white);
+    padding: 8px 16px;
+    z-index: 200;
+    font-size: 14px;
+    transition: top 0.2s;
+  }
+
+  .skip-link:focus {
+    top: 0;
+  }
+
+  .lang-toggle {
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    z-index: 100;
+    display: flex;
+    direction: ltr;
+    gap: 4px;
+    background: var(--navy);
+    padding: 4px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(10,22,40,0.25);
+  }
+
+  .lang-btn {
+    padding: 8px 18px;
+    border: none;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: transparent;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .lang-btn.active {
+    background: var(--gold);
+    color: var(--navy);
+  }
+
+  .lang-btn:hover:not(.active) {
+    color: rgba(255,255,255,0.8);
+  }
+
+  .section-en, .section-he, .section-ar { display: none; background: #FBF8F0; }
+  .section-en.visible { display: block; }
+  .section-he.visible { display: block; }
+  .section-ar.visible { display: block; }
+
+  /* ---- HEADER ---- */
+  .hero {
+    background: var(--cream);
+    padding: 80px 40px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 3px solid var(--gold);
+  }
+
+  .hero-content { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
+
+  .hero .flag-line {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .flag-star {
+    width: 36px;
+    height: 36px;
+    position: relative;
+  }
+
+  .flag-star svg { width: 100%; height: 100%; }
+
+  .hero .label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 20px;
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 38px;
+    color: var(--navy);
+    line-height: 1.25;
+    margin-bottom: 16px;
+  }
+
+  .hero .subtitle {
+    font-size: 17px;
+    color: #4B5563;
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .hero-he h1 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 36px;
+    direction: rtl;
+  }
+
+  .hero-he .subtitle,
+  .hero-he .label {
+    direction: rtl;
+  }
+
+  .hero-ar h1 {
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    font-size: 34px;
+    font-weight: 700;
+    direction: rtl;
+  }
+
+  .hero-ar .subtitle,
+  .hero-ar .label {
+    direction: rtl;
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+  }
+
+  /* ---- CONTENT ---- */
+  .content {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+    background: #FBF8F0;
+  }
+
+  .content-he {
+    direction: rtl;
+    text-align: right;
+    font-family: 'Heebo', sans-serif;
+  }
+
+  .content-ar {
+    direction: rtl;
+    text-align: right;
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+  }
+
+  .content-ar h2 {
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    font-weight: 700;
+    font-size: 23px;
+  }
+
+  .content-ar p {
+    font-size: 15px;
+    line-height: 1.9;
+  }
+
+  .content-ar .pillar-num {
+    float: right;
+    margin-right: 0;
+    margin-left: 16px;
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+  }
+
+  .content-ar .pillar h3 {
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    font-weight: 700;
+  }
+
+  .content-ar .footer-note { direction: rtl; }
+
+  .content-ar .cta-list li {
+    padding-left: 0;
+    padding-right: 20px;
+  }
+
+  .content-ar .cta-list li::before {
+    left: auto;
+    right: 0;
+  }
+
+  .content-ar .cta-box h2,
+  .content-ar .cta-box p,
+  .content-ar .cta-box .cta-list {
+    text-align: right;
+  }
+
+  .content-ar .cta-button {
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+  }
+
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    color: var(--blue);
+    margin: 40px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--gold);
+    display: inline-block;
+  }
+
+  .content-he h2 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 23px;
+  }
+
+  p {
+    font-size: 15.5px;
+    color: #2D3748;
+    margin-bottom: 14px;
+    line-height: 1.8;
+  }
+
+  .content-he p {
+    font-size: 15px;
+    line-height: 1.9;
+  }
+
+  .highlight-box {
+    background: var(--white);
+    border-right: 4px solid var(--gold);
+    border-left: 4px solid var(--gold);
+    padding: 24px 28px;
+    margin: 28px 0;
+    border-radius: 4px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+
+  .highlight-box p {
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 0;
+    font-size: 15.5px;
+  }
+
+  .pillar {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin: 16px 0;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+    border-top: 3px solid var(--sky);
+  }
+
+  .pillar-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: var(--gold);
+    float: left;
+    margin-right: 16px;
+    line-height: 1;
+  }
+
+  .content-he .pillar-num {
+    float: right;
+    margin-right: 0;
+    margin-left: 16px;
+    font-family: 'Frank Ruhl Libre', serif;
+  }
+
+  .pillar h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+
+  .content-he .pillar h3 {
+    font-family: 'Heebo', sans-serif;
+    font-weight: 700;
+  }
+
+  .pillar p {
+    font-size: 14.5px;
+    margin-bottom: 0;
+  }
+
+  .timeline {
+    display: flex;
+    gap: 12px;
+    margin: 24px 0;
+    flex-wrap: wrap;
+  }
+
+  .timeline-item {
+    flex: 1;
+    min-width: 140px;
+    background: var(--white);
+    border-radius: 8px;
+    padding: 16px 18px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+    text-align: center;
+  }
+
+  .timeline-item .day {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .timeline-item p {
+    font-size: 13px;
+    margin-bottom: 0;
+    line-height: 1.5;
+  }
+
+  .cta-box {
+    background: var(--cream);
+    border: 2px solid var(--gold);
+    border-radius: 10px;
+    padding: 32px 36px;
+    margin: 36px 0 0;
+    color: var(--navy);
+    text-align: center;
+  }
+
+  .cta-box h2 {
+    color: var(--blue);
+    border-bottom-color: var(--gold);
+    margin-top: 0;
+  }
+
+  .cta-box p {
+    color: #2D3748;
+    font-size: 15px;
+  }
+
+  .footer-note {
+    text-align: center;
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--light-gray);
+    font-size: 13px;
+    color: var(--warm-gray);
+  }
+
+  .content-he .footer-note { direction: rtl; }
+
+  .cta-list {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0 20px;
+  }
+
+  .cta-list li {
+    font-size: 15px;
+    color: #2D3748;
+    padding: 6px 0;
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .cta-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 14px;
+    width: 8px;
+    height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+
+  .content-he .cta-list li {
+    padding-left: 0;
+    padding-right: 20px;
+  }
+
+  .content-he .cta-list li::before {
+    left: auto;
+    right: 0;
+  }
+
+  .cta-button {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--navy);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 14px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-top: 12px;
+    transition: background 0.2s ease;
+    text-align: center;
+  }
+
+  .cta-box h2,
+  .cta-box p,
+  .cta-box .cta-list {
+    text-align: left;
+  }
+
+  .content-he .cta-box h2,
+  .content-he .cta-box p,
+  .content-he .cta-box .cta-list {
+    text-align: right;
+  }
+
+  .cta-button:hover {
+    background: #b8932f;
+  }
+
+  .content-he .cta-button {
+    font-family: 'Heebo', sans-serif;
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 70px 24px 48px; }
+    .hero h1 { font-size: 28px; }
+    .content { padding: 32px 20px 60px; }
+    .timeline { flex-direction: column; }
+    .lang-toggle { top: 12px; right: 12px; }
+    .lang-btn { padding: 6px 14px; font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to content / דלג לתוכן</a>
+
+<nav class="lang-toggle" aria-label="Language selection / בחירת שפה">
+  <button class="lang-btn" onclick="showLang('en')" aria-label="Switch to English">English</button>
+  <button class="lang-btn active" onclick="showLang('he')" aria-label="עברית">עברית</button>
+  <button class="lang-btn" onclick="showLang('ar')" aria-label="العربية">العربية</button>
+</nav>
+
+<!-- ==================== ENGLISH VERSION ==================== -->
+<div class="section-en" id="main-content-en">
+  <div class="hero">
+    <div class="hero-content">
+      <div class="label">Chavruta (חַבְרוּתָא) — Emergency Education Initiative · March 2026</div>
+      <h1>AI-Powered Learning for Israel's Children During Wartime</h1>
+      <p class="subtitle">A proposal to replace failing Zoom-based remote education with personalized AI tutoring, structured peer mentorship, and teacher-led mentoring — deployable rapidly, scalable nationwide.</p>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <h2>The Problem</h2>
+    <p>Israel's schools have been closed since the escalation of conflict with Iran in late February 2026. The education system's response — Zoom-based remote learning — is failing children, parents, and teachers alike.</p>
+    <p>Parents describe the situation as a nightmare: children with attention difficulties unable to focus through three-hour Zoom sessions, siblings competing for a single family computer, and parents unable to work because they must sit beside young children to manage the technology. Teachers acknowledge that the Zoom sessions serve more as emotional check-ins than meaningful academic instruction. Meanwhile, approximately 40% of Israeli schools lack adequate bomb shelters, making a rapid return to in-person learning impossible in many areas.</p>
+    <p>The core failure is structural: Israel is attempting to replicate the in-person classroom through a video call. This approach failed during COVID and is failing again — but this time, the tools exist to do something fundamentally better.</p>
+
+    <div class="highlight-box">
+      <p>The opportunity: Israel can use this moment of crisis to leapfrog into AI-augmented education — building a model that serves children better during wartime and transforms Israeli education long after the war ends.</p>
+    </div>
+
+    <h2>Why Chavruta</h2>
+    <p>In Jewish educational tradition, chavruta is the practice of paired study — two learners sitting together, questioning, challenging, and teaching each other. For centuries, it has been the engine of Jewish intellectual life: the idea that learning is not a solitary act but a relationship. One mind sharpens another.</p>
+    <p>This initiative carries that name because it embodies the same principle at every level. AI becomes a tireless study partner, adapting to each child's pace and needs. Older students are paired with younger ones in structured mentorship. Teachers shift from lecturing to guiding — sitting alongside their students, not above them. The entire model is built on the conviction that learning happens best in connection, not in isolation. Chavruta is not a technology program. It is an educational philosophy — one rooted in thousands of years of Jewish wisdom — powered by the tools of 2026.</p>
+
+    <h2>Why Now</h2>
+    <p>During COVID, the technology for truly personalized learning didn't exist. Remote education meant video calls and static worksheets. Today's AI is fundamentally different: it can tutor in fluent Hebrew, adapt in real time to a student's level, generate practice materials from official curriculum documents, and run on a smartphone. These tools are already in use in classrooms worldwide. What's missing in Israel isn't the technology — it's the decision to deploy it.</p>
+    <p>But there is a deeper reason to act now. The world is rapidly dividing into AI-literate and AI-illiterate societies. Every day an Israeli child spends learning <em>with</em> AI, they are also learning <em>how</em> to use AI — developing the intuition, critical thinking, and fluency that will define the workforce of the next decade. By introducing an entire generation of students to AI as a daily learning partner, Israel doesn't just solve a wartime crisis. It builds a generation of AI-native thinkers — and positions itself as a global leader in AI-integrated education long after the last siren sounds.</p>
+
+    <h2>The Proposed Model: Four Pillars</h2>
+
+    <div class="pillar">
+      <div class="pillar-num">1</div>
+      <h3>AI-Powered Personalized Learning (Asynchronous)</h3>
+      <p>Each child receives access to an AI tutoring environment anchored to the official Bagrut (matriculation) curriculum in Hebrew. The AI adapts to each student's pace, identifies knowledge gaps, provides instant feedback, and generates practice materials — all in Hebrew, all on any device including a smartphone. This works in a bomb shelter, at 2am, without parental supervision. The Ministry of Education feeds the official curriculum materials into the system, ensuring alignment with national standards. No new curriculum is created — the same material is delivered smarter.</p>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-num">2</div>
+      <h3>Teacher as Mentor, Not Lecturer</h3>
+      <p>Teachers shift from delivering multi-hour Zoom lectures to conducting short, targeted mentorship sessions — 15-20 minutes per student or small group, one to two times per week. An AI-powered dashboard shows teachers exactly where each student is struggling, enabling focused, informed conversations. Teachers are freed from content delivery to do what only humans can do: build relationships, provide emotional support, and guide critical thinking. This is more effective and more fulfilling than the current Zoom model.</p>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-num">3</div>
+      <h3>Structured Peer Mentorship</h3>
+      <p>Older students (grades 9-12) are paired with younger students (grades 2-5) in a highly structured mentorship program. Assigned pairs meet on scheduled calls with guided topics and simple session plans. This serves a dual purpose: younger children receive one-on-one human support that reduces the burden on parents, while older students gain structure, purpose, and a sense of agency during an extremely destabilizing period. Schools coordinate the matching; the platform provides session guides and tracks participation.</p>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-num">4</div>
+      <h3>Emotional and Community Connection</h3>
+      <p>Short group video sessions — 10-15 minutes — are preserved not for academic content but for what teachers already recognize as their real value: togetherness. These are circles where children see familiar faces, share how they're feeling, and experience a moment of normalcy. No curriculum. No screen fatigue. Just connection. This directly addresses rising concerns about children's mental health during prolonged home confinement.</p>
+    </div>
+
+    <h2>Why This Is Better</h2>
+    <p><strong>For children:</strong> Learning becomes self-paced and shame-free. Asking an AI tutor a basic question feels safer than raising your hand in front of thirty peers. Children studying for Bagrut exams get personalized preparation targeted to their specific weak areas. Younger children get interactive, adaptive content without requiring a parent to sit beside them for hours.</p>
+    <p><strong>For parents:</strong> The single biggest relief — parents are no longer unpaid teaching assistants. Their role becomes ensuring the device is charged and the child has a quiet period to study. No more competing for the family computer. No more three-hour Zoom supervision. This directly addresses the impossible situation created by workplaces reopening while schools remain closed.</p>
+    <p><strong>For teachers:</strong> Instead of lecturing into a void of muted microphones, teachers become mentors with real data about their students. They see who is engaged, who is falling behind, and where the struggles are. Their limited synchronous time is spent on targeted, meaningful human interaction — the work most teachers entered the profession to do.</p>
+    <p><strong>For students with special needs:</strong> AI tutoring is inherently more patient, more adaptive, and more flexible than any group Zoom session. Children with ADHD, learning disabilities, or attention difficulties can learn at their own pace without social pressure. This addresses a critical gap in the current emergency model.</p>
+    <p><strong>For the Arab sector:</strong> Modern AI tools operate fluently in Arabic. This program can serve the approximately 20% of Israeli students in the Arab education system, potentially bridging a longstanding equity gap in educational access and quality.</p>
+
+    <h2>Curriculum Backbone</h2>
+    <p>This is not experimental pedagogy. The AI tutoring system is anchored to the Ministry of Education's existing Bagrut curriculum. Official matriculation materials — in Hebrew — are fed into the AI system as its knowledge base. The AI generates practice questions, explanations, and study guides rooted in the exact material students need to master for their exams. Teachers and parents can see exactly what is being studied. The content is transparent, standard-aligned, and measurable against existing benchmarks.</p>
+
+    <h2>Device Access</h2>
+    <p>A critical advantage of this model is that it requires less technology than Zoom. A smartphone with basic internet access is sufficient — no camera, no stable broadband, no laptop required. For families lacking devices, we propose a rapid device lending program coordinated through the Ministry's existing school relationships. Schools conduct a device census, identify gaps, and distribute refurbished tablets and phones — sourced through a national donation and resale campaign, tech industry partnerships, and nonprofit support. IT volunteers from Israel's tech sector help prepare and configure devices.</p>
+
+    <h2>Pilot Plan</h2>
+    <p>We propose a mixed pilot across 4-6 schools: schools in heavily impacted conflict zones (north/center) alongside schools in calmer areas still operating remotely. This provides both proof that the model works under the most extreme conditions and a comparison baseline. The pilot should include Jewish-sector and Arab-sector schools to demonstrate inclusivity from day one.</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="day">Phase 1</div>
+        <p>Ministry alignment, champion identified, pilot schools selected</p>
+      </div>
+      <div class="timeline-item">
+        <div class="day">Phase 2</div>
+        <p>Tech stack deployed, Bagrut materials ingested, teachers briefed</p>
+      </div>
+      <div class="timeline-item">
+        <div class="day">Phase 3</div>
+        <p>Devices distributed, soft launch at first school, rapid iteration</p>
+      </div>
+      <div class="timeline-item">
+        <div class="day">Phase 4</div>
+        <p>Expand to all pilot schools, gather data, refine and scale nationwide</p>
+      </div>
+    </div>
+
+    <h2>Beyond the War</h2>
+    <p>If this model works during wartime — in bomb shelters, under missile fire, with limited devices — it can work anywhere. Israel has an opportunity to emerge from this crisis as a global leader in AI-augmented education. The wartime emergency becomes a proof of concept for a permanent blended learning model: AI handles personalized content delivery, teachers focus on mentorship and critical thinking, and peer connections strengthen the social fabric of schools. This isn't just a temporary fix. It's a transformation.</p>
+
+    <div class="cta-box">
+      <h2>The Ask</h2>
+      <p>We are assembling a coalition of technologists, educators, and civic leaders to move this from concept to deployment as rapidly as possible. We need:</p>
+      <ul class="cta-list">
+        <li>Partnership with the Ministry of Education for curriculum access and school coordination</li>
+        <li>Engineering and product talent to build the coordination layer</li>
+        <li>AI and platform partnerships for the tutoring infrastructure</li>
+        <li>Teacher advocates who can help train and recruit pilot educators</li>
+        <li>Funding or in-kind support for device procurement and deployment</li>
+      </ul>
+      <p>Israel's children cannot wait for a committee to finish deliberating. The tools exist. The need is urgent. The opportunity is historic.</p>
+      <a href="https://chat.whatsapp.com/LLGqYWYCZ5EK4Z0luPd5OC" target="_blank" rel="noopener noreferrer" class="cta-button">Join the Coalition on WhatsApp →</a>
+    </div>
+
+    <div class="footer-note">
+      <p>March 2026 · Chavruta Initiative</p>
+      <p style="margin-top: 8px; font-size: 14px; color: var(--navy);"><strong>Edoe Cohen</strong></p>
+      <p><a href="mailto:edoecohen@gmail.com" style="color: var(--blue);">edoecohen@gmail.com</a> · 052-287-7676</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==================== HEBREW VERSION ==================== -->
+<div class="section-he visible" id="main-content">
+  <div class="hero hero-he">
+    <div class="hero-content">
+      <div class="label">חַבְרוּתָא — יוזמת חינוך חירום · מרץ 2026</div>
+      <h1>למידה מונעת בינה מלאכותית לילדי ישראל בעת מלחמה</h1>
+      <p class="subtitle">הצעה להחלפת מודל הזום הכושל בתגבור אישי מבוסס AI, חונכות עמיתים מובנית, והנחיית מורים — ניתן לפריסה מהירה, להרחבה ארצית.</p>
+    </div>
+  </div>
+
+  <div class="content content-he">
+
+    <h2>הבעיה</h2>
+    <p>בתי הספר בישראל סגורים מאז הסלמת הלחימה מול איראן בסוף פברואר 2026. תגובת מערכת החינוך — למידה מרחוק באמצעות זום — נכשלת: ילדים, הורים ומורים כאחד סובלים.</p>
+    <p>הורים מתארים את המצב כסיוט: ילדים עם קשיי קשב שלא מצליחים להתרכז לאורך שלוש שעות זום, אחים שנלחמים על מחשב אחד, והורים שלא יכולים לעבוד כי הם חייבים לשבת ליד ילדיהם הצעירים ולנהל את הטכנולוגיה. מורים מודים שמפגשי הזום משמשים יותר כצ'ק-אין רגשי מאשר הוראה אקדמית משמעותית. במקביל, כ-40% מבתי הספר בישראל חסרים מרחבים מוגנים מתאימים, מה שהופך חזרה מהירה ללמידה פנים אל פנים לבלתי אפשרית באזורים רבים.</p>
+    <p>הכשל הוא מבני: ישראל מנסה לשכפל את הכיתה הפיזית דרך שיחת וידאו. גישה זו נכשלה בקורונה ונכשלת שוב — אבל הפעם, הכלים קיימים כדי לעשות משהו טוב יותר באופן מהותי.</p>
+
+    <div class="highlight-box">
+      <p>ההזדמנות: ישראל יכולה להשתמש ברגע המשבר הזה כדי לקפוץ קדימה אל חינוך מועצם בבינה מלאכותית — לבנות מודל שמשרת ילדים טוב יותר בזמן מלחמה ומשנה את החינוך הישראלי הרבה אחרי שהמלחמה תסתיים.</p>
+    </div>
+
+    <h2>למה חַבְרוּתָא</h2>
+    <p>במסורת הלימוד היהודית, חברותא היא שיטת הלמידה בזוגות — שני לומדים יושבים יחד, שואלים, מאתגרים ומלמדים זה את זה. במשך מאות שנים, זו הייתה המנוע של החיים האינטלקטואליים היהודיים: הרעיון שלמידה אינה מעשה בודד אלא מערכת יחסים. חד מחדד חד.</p>
+    <p>יוזמה זו נושאת שם זה משום שהיא מגלמת את אותו עיקרון בכל רמה. ה-AI הופך לשותף למידה בלתי נלאה, שמתאים את עצמו לקצב ולצרכים של כל ילד. תלמידים בוגרים משובצים עם צעירים בחונכות מובנית. מורים עוברים מהרצאה להנחיה — יושבים לצד תלמידיהם, לא מעליהם. כל המודל בנוי על האמונה שלמידה מתרחשת בצורה הטובה ביותר בחיבור, לא בבידוד. חברותא אינה תוכנית טכנולוגית. היא פילוסופיה חינוכית — כזו המושרשת באלפי שנות חוכמה יהודית — מונעת בכלים של 2026.</p>
+
+    <h2>למה עכשיו</h2>
+    <p>בתקופת הקורונה, הטכנולוגיה ללמידה מותאמת אישית באמת לא הייתה קיימת. חינוך מרחוק התבסס על שיחות וידאו ודפי עבודה סטטיים. ה-AI של היום שונה מיסודו: הוא יכול ללמד בעברית שוטפת, להתאים את עצמו בזמן אמת לרמת התלמיד, לייצר חומרי תרגול מתוך מסמכי תוכנית הלימודים הרשמית, ולרוץ על סמארטפון. הכלים האלה כבר בשימוש בכיתות ברחבי העולם. מה שחסר בישראל זו לא הטכנולוגיה — אלא ההחלטה לפרוס אותה.</p>
+    <p>אבל יש סיבה עמוקה יותר לפעול עכשיו. העולם מתחלק במהירות לחברות בעלות אוריינות AI ולכאלה שחסרות אותה. כל יום שבו ילד ישראלי לומד <em>עם</em> AI, הוא גם לומד <em>כיצד</em> להשתמש ב-AI — מפתח אינטואיציה, חשיבה ביקורתית ושטף שיגדירו את כוח העבודה של העשור הבא. על ידי הכרת דור שלם של תלמידים עם AI כשותף למידה יומיומי, ישראל לא רק פותרת משבר בזמן מלחמה. היא בונה דור של חושבים ילידי AI — ומציבה את עצמה כמובילה עולמית בחינוך משולב AI הרבה אחרי שהצפירה האחרונה תשתתק.</p>
+
+    <h2>המודל המוצע: ארבעה עמודי תווך</h2>
+
+    <div class="pillar">
+      <div class="pillar-num">1</div>
+      <h3>למידה מותאמת אישית מבוססת AI (אסינכרונית)</h3>
+      <p>כל ילד מקבל גישה לסביבת תגבור AI המעוגנת בתוכנית הלימודים הרשמית לבגרות — בעברית. ה-AI מתאים את עצמו לקצב של כל תלמיד, מזהה פערי ידע, נותן משוב מיידי ומייצר חומרי תרגול — הכול בעברית, בכל מכשיר כולל סמארטפון. זה עובד במקלט, בשעה שתיים בלילה, בלי השגחת הורים. משרד החינוך מזין את חומרי הלימוד הרשמיים למערכת, ומבטיח התאמה לתקנים הלאומיים. לא נוצרת תוכנית לימודים חדשה — אותו חומר מועבר בצורה חכמה יותר.</p>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-num">2</div>
+      <h3>המורה כמנטור, לא כמרצה</h3>
+      <p>מורים עוברים מהעברת שיעורי זום ארוכים לקיום מפגשי חונכות קצרים וממוקדים — 15-20 דקות לתלמיד או קבוצה קטנה, פעם עד פעמיים בשבוע. לוח בקרה מבוסס AI מראה למורים בדיוק היכן כל תלמיד מתקשה, ומאפשר שיחות ממוקדות ומושכלות. מורים משוחררים מהעברת תוכן כדי לעשות את מה שרק בני אדם יכולים: לבנות יחסים, לתת תמיכה רגשית ולהנחות חשיבה ביקורתית. זה יעיל יותר ומספק יותר מהמודל הנוכחי.</p>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-num">3</div>
+      <h3>חונכות עמיתים מובנית</h3>
+      <p>תלמידים בוגרים (כיתות ט׳-י״ב) משובצים עם תלמידים צעירים (כיתות ב׳-ה׳) בתוכנית חונכות מובנית. זוגות קבועים נפגשים בשיחות מתוזמנות עם נושאים מודרכים ותוכניות מפגש פשוטות. המטרה כפולה: ילדים צעירים מקבלים תמיכה אנושית אישית שמפחיתה את העומס על ההורים, בעוד שתלמידים בוגרים מקבלים מבנה, תחושת משמעות ותחושת שליטה בתקופה מערערת ביותר.</p>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-num">4</div>
+      <h3>חיבור רגשי וקהילתי</h3>
+      <p>מפגשי וידאו קבוצתיים קצרים — 10-15 דקות — נשמרים לא לתוכן אקדמי אלא למה שמורים כבר מזהים כערך האמיתי שלהם: ביחד. אלה מעגלים שבהם ילדים רואים פנים מוכרות, משתפים איך הם מרגישים, וחווים רגע של נורמליות. בלי תוכנית לימודים. בלי עייפות מסך. רק חיבור. זה מתייחס ישירות לדאגות הגוברות לגבי בריאות הנפש של ילדים בתקופה ממושכת של שהייה בבית.</p>
+    </div>
+
+    <h2>למה זה עדיף</h2>
+    <p><strong>לילדים:</strong> הלמידה הופכת לצמודת-קצב ונטולת בושה. לשאול שאלה בסיסית מ-AI מרגיש בטוח יותר מלהרים יד מול שלושים עמיתים. תלמידים שנערכים לבגרויות מקבלים הכנה מותאמת אישית הממוקדת בנקודות החולשה שלהם. ילדים צעירים מקבלים תוכן אינטראקטיבי ומסתגל בלי שהורה ישב לידם שעות.</p>
+    <p><strong>להורים:</strong> ההקלה הגדולה ביותר — הורים כבר לא עוזרי הוראה ללא שכר. תפקידם הופך להבטיח שהמכשיר טעון ולילד יש זמן שקט ללמוד. בלי תחרות על המחשב המשפחתי. בלי שלוש שעות השגחה על זום. זה מתייחס ישירות למצב הבלתי אפשרי שנוצר כשמקומות עבודה נפתחים בעוד בתי ספר נשארים סגורים.</p>
+    <p><strong>למורים:</strong> במקום להרצות לתוך ריק של מיקרופונים מושתקים, מורים הופכים למנטורים עם מידע אמיתי על התלמידים שלהם. הם רואים מי מעורב, מי נשאר מאחור ואיפה הקשיים. הזמן הסינכרוני המוגבל שלהם מושקע באינטראקציה אנושית ממוקדת ומשמעותית — העבודה שבגללה רוב המורים נכנסו למקצוע.</p>
+    <p><strong>לתלמידים עם צרכים מיוחדים:</strong> תגבור AI הוא מטבעו סבלני יותר, מסתגל יותר וגמיש יותר מכל מפגש זום קבוצתי. ילדים עם הפרעות קשב, לקויות למידה או קשיי ריכוז יכולים ללמוד בקצב שלהם ללא לחץ חברתי.</p>
+    <p><strong>למגזר הערבי:</strong> כלי AI מודרניים פועלים בשטף בערבית. תוכנית זו יכולה לשרת כ-20% מתלמידי ישראל במגזר הערבי, ולגשר על פערי הזדמנויות חינוכיים ארוכי שנים.</p>
+
+    <h2>עמוד השדרה: תוכנית הלימודים לבגרות</h2>
+    <p>זו לא פדגוגיה ניסיונית. מערכת התגבור מבוססת על תוכנית הלימודים הקיימת של משרד החינוך לבגרויות. חומרי הבגרות הרשמיים — בעברית — מוזנים למערכת ה-AI כבסיס הידע שלה. ה-AI מייצר שאלות תרגול, הסברים ומדריכי למידה המעוגנים בדיוק בחומר שתלמידים צריכים לשלוט בו למבחנים. מורים והורים יכולים לראות בדיוק מה נלמד. התוכן שקוף, מיושר עם תקנים, וניתן למדידה מול אמות מידה קיימות.</p>
+
+    <h2>גישה למכשירים</h2>
+    <p>יתרון קריטי של מודל זה הוא שהוא דורש פחות טכנולוגיה מזום. סמארטפון עם גישה בסיסית לאינטרנט מספיק — בלי מצלמה, בלי פס רחב יציב, בלי מחשב נייד. למשפחות ללא מכשירים, אנו מציעים תוכנית השאלת מכשירים מהירה בתיאום עם בתי הספר דרך הקשרים הקיימים של המשרד. בתי ספר עורכים מפקד מכשירים, מזהים פערים, ומפיצים טאבלטים וטלפונים משופצים — ממקורות של תרומות לאומיות, שותפויות עם תעשיית הטכנולוגיה ותמיכת עמותות. מתנדבי IT ממגזר הטכנולוגיה מסייעים בהכנה והגדרת מכשירים.</p>
+
+    <h2>תוכנית פיילוט</h2>
+    <p>אנו מציעים פיילוט מעורב ב-4-6 בתי ספר: בתי ספר באזורים שנפגעו קשות (צפון/מרכז) לצד בתי ספר באזורים שקטים יותר שעדיין פועלים מרחוק. זה מספק הן הוכחה שהמודל עובד בתנאים הקיצוניים ביותר, והן בסיס להשוואה. הפיילוט צריך לכלול בתי ספר מהמגזר היהודי ומהמגזר הערבי כדי להפגין הכלה מהיום הראשון.</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="day">שלב 1</div>
+        <p>גיבוש הסכמה מול המשרד, זיהוי גורם מוביל, בחירת בתי ספר לפיילוט</p>
+      </div>
+      <div class="timeline-item">
+        <div class="day">שלב 2</div>
+        <p>פריסת מערך טכנולוגי, הזנת חומרי בגרות, תדרוך מורים</p>
+      </div>
+      <div class="timeline-item">
+        <div class="day">שלב 3</div>
+        <p>הפצת מכשירים, השקה רכה בבית ספר ראשון, שיפור מהיר</p>
+      </div>
+      <div class="timeline-item">
+        <div class="day">שלב 4</div>
+        <p>הרחבה לכלל בתי הספר בפיילוט, איסוף נתונים, שכלול והרחבה ארצית</p>
+      </div>
+    </div>
+
+    <h2>מעבר למלחמה</h2>
+    <p>אם מודל זה עובד בזמן מלחמה — במקלטים, תחת ירי טילים, עם מכשירים מוגבלים — הוא יכול לעבוד בכל מקום. לישראל יש הזדמנות לצאת מהמשבר הזה כמובילה עולמית בחינוך מועצם בבינה מלאכותית. מצב החירום הופך להוכחת היתכנות למודל למידה משולב קבוע: AI מטפל בהעברת תוכן מותאם אישית, מורים מתמקדים בחונכות ובחשיבה ביקורתית, וחיבורי עמיתים מחזקים את המרקם החברתי של בתי הספר. זה לא פתרון זמני. זו טרנספורמציה.</p>
+
+    <div class="cta-box">
+      <h2>הבקשה</h2>
+      <p>אנו מרכיבים קואליציה של אנשי טכנולוגיה, מחנכים ומנהיגים אזרחיים כדי להעביר את זה מקונספט לפריסה במהירות המרבית. אנחנו צריכים:</p>
+      <ul class="cta-list">
+        <li>שותפות עם משרד החינוך לגישה לתוכנית הלימודים ולתיאום בתי ספר</li>
+        <li>כישרון הנדסי ומוצרי לבניית שכבת התיאום</li>
+        <li>שותפויות AI ופלטפורמה לתשתית התגבור</li>
+        <li>סנגורי מורים שיכולים לעזור בהכשרה ובגיוס מחנכים לפיילוט</li>
+        <li>מימון או תמיכה בעין לרכש מכשירים ופריסה</li>
+      </ul>
+      <p>ילדי ישראל לא יכולים לחכות שוועדה תסיים לדון. הכלים קיימים. הצורך דחוף. ההזדמנות היסטורית.</p>
+      <a href="https://chat.whatsapp.com/LLGqYWYCZ5EK4Z0luPd5OC" target="_blank" rel="noopener noreferrer" class="cta-button">← הצטרפו לקואליציה בוואטסאפ</a>
+    </div>
+
+    <div class="footer-note">
+      <p>מרץ 2026 · יוזמת חברותא</p>
+      <p style="margin-top: 8px; font-size: 14px; color: var(--navy);"><strong>עדו כהן</strong></p>
+      <p><a href="mailto:edoecohen@gmail.com" style="color: var(--blue);">edoecohen@gmail.com</a> · 052-287-7676</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==================== ARABIC VERSION ==================== -->
+<div class="section-ar">
+  <div class="hero hero-ar">
+    <div class="hero-content">
+      <div class="label">حَبْروتا — مبادرة تعليم طوارئ · آذار 2026</div>
+      <h1>تعليم مدعوم بالذكاء الاصطناعي لأطفال إسرائيل في زمن الحرب</h1>
+      <p class="subtitle">مقترح لاستبدال التعليم عن بُعد الفاشل عبر زوم بتعليم شخصي مدعوم بالذكاء الاصطناعي، وإرشاد أقران منظّم، وتوجيه معلمين — قابل للنشر السريع والتوسع على مستوى البلاد.</p>
+    </div>
+  </div>
+
+  <div class="content content-ar">
+
+    <h2>المشكلة</h2>
+    <p>مدارس إسرائيل مغلقة منذ تصاعد الصراع مع إيران في أواخر شباط 2026. استجابة جهاز التعليم — التعلّم عن بُعد عبر زوم — تفشل: الأطفال والأهالي والمعلمون يعانون على حدٍّ سواء.</p>
+    <p>يصف الأهالي الوضع بالكابوس: أطفال يعانون من صعوبات في التركيز لا يستطيعون الانتباه خلال جلسات زوم لثلاث ساعات، وإخوة يتنافسون على حاسوب عائلي واحد، وأهالٍ لا يستطيعون العمل لأنهم مضطرون للجلوس بجانب أطفالهم الصغار لإدارة التكنولوجيا. يعترف المعلمون بأن جلسات الزوم تعمل كفحص عاطفي أكثر منها تعليم أكاديمي حقيقي. في الوقت نفسه، نحو 40% من مدارس إسرائيل تفتقر إلى ملاجئ مناسبة، مما يجعل العودة السريعة للتعلم وجهاً لوجه مستحيلة في مناطق كثيرة.</p>
+    <p>الفشل هيكلي في جوهره: إسرائيل تحاول تكرار الصف الدراسي التقليدي عبر مكالمة فيديو. هذا النهج فشل خلال كورونا ويفشل مجدداً — لكن هذه المرة، الأدوات موجودة للقيام بشيء أفضل جوهرياً.</p>
+
+    <div class="highlight-box">
+      <p>الفرصة: يمكن لإسرائيل استغلال لحظة الأزمة هذه للقفز نحو تعليم معزّز بالذكاء الاصطناعي — بناء نموذج يخدم الأطفال بشكل أفضل في زمن الحرب ويُحوّل التعليم الإسرائيلي بعد انتهاء الحرب بفترة طويلة.</p>
+    </div>
+
+    <h2>لماذا حَبْروتا</h2>
+    <p>في التقليد التعليمي اليهودي، الحبروتا هي أسلوب الدراسة الثنائية — متعلمان يجلسان معاً، يسألان ويتحدّيان ويعلّمان بعضهما البعض. لقرون عديدة، كانت هذه محرك الحياة الفكرية اليهودية: فكرة أن التعلم ليس فعلاً فردياً بل علاقة. عقل يشحذ عقلاً آخر.</p>
+    <p>تحمل هذه المبادرة هذا الاسم لأنها تجسّد نفس المبدأ على كل مستوى. الذكاء الاصطناعي يصبح شريك دراسة لا يكلّ، يتكيّف مع وتيرة واحتياجات كل طفل. الطلاب الأكبر سناً يُقرنون مع الأصغر في إرشاد منظّم. المعلمون ينتقلون من المحاضرة إلى التوجيه — يجلسون بجانب طلابهم، لا فوقهم. النموذج بأكمله مبني على القناعة بأن التعلم يحدث بشكل أفضل في التواصل، لا في العزلة. حبروتا ليست برنامجاً تكنولوجياً. إنها فلسفة تعليمية — متجذرة في آلاف السنين من الحكمة — مدعومة بأدوات عام 2026.</p>
+
+    <h2>لماذا الآن</h2>
+    <p>خلال كورونا، لم تكن تكنولوجيا التعلم الشخصي الحقيقي موجودة. التعليم عن بُعد كان يعني مكالمات فيديو وأوراق عمل ثابتة. الذكاء الاصطناعي اليوم مختلف جذرياً: يمكنه التدريس بالعربية والعبرية بطلاقة، والتكيّف فورياً مع مستوى الطالب، وتوليد مواد تدريب من وثائق المنهج الرسمي، والعمل على هاتف ذكي. هذه الأدوات مُستخدمة بالفعل في صفوف حول العالم. ما ينقص إسرائيل ليس التكنولوجيا — بل القرار بنشرها.</p>
+    <p>لكن هناك سبب أعمق للتحرك الآن. العالم ينقسم بسرعة إلى مجتمعات مُلمّة بالذكاء الاصطناعي وأخرى غير مُلمّة. كل يوم يتعلم فيه طفل إسرائيلي <em>مع</em> الذكاء الاصطناعي، يتعلم أيضاً <em>كيفية</em> استخدام الذكاء الاصطناعي — يطوّر الحدس والتفكير النقدي والطلاقة التي ستحدد القوى العاملة في العقد القادم. بتعريف جيل كامل من الطلاب على الذكاء الاصطناعي كشريك تعلّم يومي، لا تحلّ إسرائيل أزمة حرب فحسب. بل تبني جيلاً من المفكرين الأصليين في الذكاء الاصطناعي — وتضع نفسها كرائدة عالمية في التعليم المدمج بالذكاء الاصطناعي بعد فترة طويلة من صمت آخر صافرة إنذار.</p>
+
+    <h2>النموذج المقترح: أربعة ركائز</h2>
+
+    <div class="pillar">
+      <div class="pillar-num">1</div>
+      <h3>تعلّم شخصي مدعوم بالذكاء الاصطناعي (غير متزامن)</h3>
+      <p>يحصل كل طفل على بيئة تعليم بالذكاء الاصطناعي مرتبطة بمنهج البجروت (الثانوية العامة) الرسمي. يتكيّف الذكاء الاصطناعي مع وتيرة كل طالب، ويحدد فجوات المعرفة، ويقدم تغذية راجعة فورية، ويولّد مواد تدريب — الكل بالعربية والعبرية، على أي جهاز بما فيه الهاتف الذكي. يعمل في الملجأ، في الثانية صباحاً، بدون إشراف الأهل. وزارة التربية تُغذي المنهج الرسمي في النظام، مما يضمن التوافق مع المعايير الوطنية. لا يُنشأ منهج جديد — نفس المادة تُقدَّم بشكل أذكى.</p>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-num">2</div>
+      <h3>المعلم كموجّه، لا كمحاضر</h3>
+      <p>ينتقل المعلمون من إلقاء محاضرات زوم طويلة إلى عقد جلسات إرشاد قصيرة ومركّزة — 15-20 دقيقة لكل طالب أو مجموعة صغيرة، مرة إلى مرتين أسبوعياً. لوحة معلومات مدعومة بالذكاء الاصطناعي تُظهر للمعلمين بدقة أين يعاني كل طالب، مما يتيح محادثات مركّزة ومستنيرة. يتحرر المعلمون من تقديم المحتوى ليقوموا بما يمكن للبشر فقط فعله: بناء العلاقات، وتقديم الدعم العاطفي، وتوجيه التفكير النقدي. هذا أكثر فعالية وإرضاءً من نموذج الزوم الحالي.</p>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-num">3</div>
+      <h3>إرشاد أقران منظّم</h3>
+      <p>يُقرن الطلاب الأكبر سناً (صفوف 9-12) مع الطلاب الأصغر (صفوف 2-5) في برنامج إرشاد منظّم للغاية. تلتقي الأزواج المعيّنة في مكالمات مجدولة بمواضيع موجّهة وخطط جلسات بسيطة. يخدم هذا هدفاً مزدوجاً: الأطفال الأصغر يحصلون على دعم إنساني فردي يخفف العبء عن الأهل، بينما يكتسب الطلاب الأكبر هيكلية وهدفاً وإحساساً بالقدرة على الفعل خلال فترة مزعزعة للغاية.</p>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-num">4</div>
+      <h3>التواصل العاطفي والمجتمعي</h3>
+      <p>جلسات فيديو جماعية قصيرة — 10-15 دقيقة — تُحفظ ليس للمحتوى الأكاديمي بل لما يعترف المعلمون بأنه قيمتها الحقيقية: التواجد معاً. هذه حلقات يرى فيها الأطفال وجوهاً مألوفة، ويشاركون مشاعرهم، ويعيشون لحظة من الحياة الطبيعية. بدون منهج. بدون إرهاق الشاشة. فقط تواصل. هذا يعالج مباشرة المخاوف المتزايدة بشأن الصحة النفسية للأطفال خلال البقاء المطوّل في المنزل.</p>
+    </div>
+
+    <h2>لماذا هذا أفضل</h2>
+    <p><strong>للأطفال:</strong> يصبح التعلم ذاتي الوتيرة وخالياً من الخجل. طرح سؤال أساسي على معلم ذكاء اصطناعي يبدو أكثر أماناً من رفع اليد أمام ثلاثين زميلاً. الطلاب المستعدون لامتحانات البجروت يحصلون على إعداد شخصي يستهدف نقاط ضعفهم تحديداً. الأطفال الأصغر يحصلون على محتوى تفاعلي وتكيّفي دون الحاجة لجلوس أحد الوالدين بجانبهم لساعات.</p>
+    <p><strong>للأهالي:</strong> أكبر راحة — الأهالي لم يعودوا مساعدي تدريس بدون أجر. يتحول دورهم إلى التأكد من أن الجهاز مشحون وأن الطفل لديه وقت هادئ للدراسة. بدون تنافس على الحاسوب العائلي. بدون ثلاث ساعات من مراقبة الزوم. هذا يعالج مباشرة الوضع المستحيل الناتج عن فتح أماكن العمل بينما تبقى المدارس مغلقة.</p>
+    <p><strong>للمعلمين:</strong> بدلاً من المحاضرة في فراغ من الميكروفونات المكتومة، يصبح المعلمون موجهين ببيانات حقيقية عن طلابهم. يرون من يشارك، ومن يتخلّف، وأين الصعوبات. وقتهم المتزامن المحدود يُستثمر في تفاعل إنساني مركّز وهادف — العمل الذي دخل معظم المعلمين المهنة من أجله.</p>
+    <p><strong>للطلاب ذوي الاحتياجات الخاصة:</strong> التعليم بالذكاء الاصطناعي بطبيعته أكثر صبراً وتكيّفاً ومرونة من أي جلسة زوم جماعية. الأطفال الذين يعانون من اضطراب فرط الحركة ونقص الانتباه أو صعوبات التعلم يمكنهم التعلم بوتيرتهم الخاصة دون ضغط اجتماعي.</p>
+    <p><strong>للمجتمع العربي:</strong> أدوات الذكاء الاصطناعي الحديثة تعمل بطلاقة بالعربية. يمكن لهذا البرنامج خدمة نحو 20% من طلاب إسرائيل في جهاز التعليم العربي، مع إمكانية سدّ فجوة طويلة الأمد في الوصول إلى التعليم وجودته.</p>
+
+    <h2>العمود الفقري: منهج البجروت</h2>
+    <p>هذه ليست تجربة تربوية. نظام التعليم بالذكاء الاصطناعي مرتبط بمنهج البجروت القائم لوزارة التربية. مواد الثانوية العامة الرسمية تُغذّى في نظام الذكاء الاصطناعي كقاعدة معرفية. يولّد الذكاء الاصطناعي أسئلة تدريب وشروحات وأدلة دراسة متجذرة بالضبط في المادة التي يحتاج الطلاب إتقانها لامتحاناتهم. يمكن للمعلمين والأهالي رؤية ما يُدرَس بالضبط. المحتوى شفاف ومتوافق مع المعايير وقابل للقياس مقابل مقاييس مرجعية قائمة.</p>
+
+    <h2>الوصول إلى الأجهزة</h2>
+    <p>ميزة حاسمة لهذا النموذج أنه يتطلب تكنولوجيا أقل من زوم. هاتف ذكي مع اتصال إنترنت أساسي يكفي — بدون كاميرا، بدون نطاق عريض مستقر، بدون حاسوب محمول. للعائلات التي تفتقر إلى أجهزة، نقترح برنامج إعارة أجهزة سريع بالتنسيق مع المدارس. تجري المدارس إحصاء للأجهزة، وتحدد الفجوات، وتوزع أجهزة لوحية وهواتف مجدّدة — من مصادر تبرعات وطنية، وشراكات مع قطاع التكنولوجيا، ودعم منظمات غير ربحية.</p>
+
+    <h2>خطة التجربة</h2>
+    <p>نقترح تجربة مختلطة في 4-6 مدارس: مدارس في مناطق الصراع المتأثرة بشدة (شمال/وسط) إلى جانب مدارس في مناطق أهدأ لا تزال تعمل عن بُعد. هذا يوفر إثباتاً بأن النموذج يعمل في أقسى الظروف وقاعدة للمقارنة. يجب أن تشمل التجربة مدارس من القطاع اليهودي والقطاع العربي لإظهار الشمولية من اليوم الأول.</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="day">المرحلة 1</div>
+        <p>التنسيق مع الوزارة، تحديد قائد، اختيار المدارس التجريبية</p>
+      </div>
+      <div class="timeline-item">
+        <div class="day">المرحلة 2</div>
+        <p>نشر البنية التقنية، إدخال مواد البجروت، إحاطة المعلمين</p>
+      </div>
+      <div class="timeline-item">
+        <div class="day">المرحلة 3</div>
+        <p>توزيع الأجهزة، إطلاق تجريبي في المدرسة الأولى، تحسين سريع</p>
+      </div>
+      <div class="timeline-item">
+        <div class="day">المرحلة 4</div>
+        <p>التوسع لجميع المدارس التجريبية، جمع البيانات، تحسين وتوسيع على مستوى البلاد</p>
+      </div>
+    </div>
+
+    <h2>ما بعد الحرب</h2>
+    <p>إذا نجح هذا النموذج في زمن الحرب — في الملاجئ، تحت القصف الصاروخي، بأجهزة محدودة — فيمكنه العمل في أي مكان. لدى إسرائيل فرصة للخروج من هذه الأزمة كرائدة عالمية في التعليم المعزّز بالذكاء الاصطناعي. حالة الطوارئ تصبح إثبات جدوى لنموذج تعلّم مدمج دائم: الذكاء الاصطناعي يتولى تقديم المحتوى الشخصي، المعلمون يركّزون على التوجيه والتفكير النقدي، وروابط الأقران تقوّي النسيج الاجتماعي للمدارس. هذا ليس حلاً مؤقتاً. إنه تحوّل.</p>
+
+    <div class="cta-box">
+      <h2>المطلوب</h2>
+      <p>نحن نجمع تحالفاً من التقنيين والمربّين والقادة المدنيين لنقل هذا من مفهوم إلى تطبيق بأسرع وقت ممكن. نحتاج:</p>
+      <ul class="cta-list">
+        <li>شراكة مع وزارة التربية للوصول إلى المنهج وتنسيق المدارس</li>
+        <li>كفاءات هندسية ومنتجات لبناء طبقة التنسيق</li>
+        <li>شراكات ذكاء اصطناعي ومنصات للبنية التحتية التعليمية</li>
+        <li>مناصرون من المعلمين للمساعدة في تدريب وتجنيد معلمين للتجربة</li>
+        <li>تمويل أو دعم عيني لشراء الأجهزة ونشرها</li>
+      </ul>
+      <p>أطفال إسرائيل لا يمكنهم الانتظار حتى تنتهي لجنة من التداول. الأدوات موجودة. الحاجة ملحّة. الفرصة تاريخية.</p>
+      <a href="https://chat.whatsapp.com/LLGqYWYCZ5EK4Z0luPd5OC" target="_blank" rel="noopener noreferrer" class="cta-button">← انضموا إلى التحالف عبر واتساب</a>
+    </div>
+
+    <div class="footer-note">
+      <p>آذار 2026 · مبادرة حبروتا</p>
+      <p style="margin-top: 8px; font-size: 14px; color: var(--navy);"><strong>إيدو كوهين</strong></p>
+      <p><a href="mailto:edoecohen@gmail.com" style="color: var(--blue);">edoecohen@gmail.com</a> · 052-287-7676</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function showLang(lang) {
+    document.querySelectorAll('.section-en, .section-he, .section-ar').forEach(el => el.classList.remove('visible'));
+    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+
+    var langConfig = {
+      en: { idx: 0, lang: 'en', dir: 'ltr', title: 'Chavruta — AI-Powered Emergency Education for Israel' },
+      he: { idx: 1, lang: 'he', dir: 'rtl', title: 'חברותא — למידה מונעת AI לילדי ישראל' },
+      ar: { idx: 2, lang: 'ar', dir: 'rtl', title: 'حَبْروتا — تعليم طوارئ مدعوم بالذكاء الاصطناعي لأطفال إسرائيل' }
+    };
+
+    var cfg = langConfig[lang];
+    document.querySelector('.section-' + lang).classList.add('visible');
+    document.querySelectorAll('.lang-btn')[cfg.idx].classList.add('active');
+    document.documentElement.lang = cfg.lang;
+    document.documentElement.dir = cfg.dir;
+    document.title = cfg.title;
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+name: "General Feedback / משוב כללי"
+description: "Share feedback, ask a question, or tell us about your experience"
+title: "[Feedback] "
+labels: ["feedback"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        We want to hear from you — whether you're a parent, teacher, student, engineer, or just someone who cares about education in Israel. No feedback is too small.
+
+        אנחנו רוצים לשמוע מכם — בין אם אתם הורים, מורים, תלמידים, מהנדסים, או סתם מישהו שאכפת לו מהחינוך בישראל. אין משוב קטן מדי.
+  - type: dropdown
+    id: who
+    attributes:
+      label: "I am a... / ...אני"
+      options:
+        - "Parent / הורה"
+        - "Teacher / מורה"
+        - "Student / תלמיד/ה"
+        - "School administrator / מנהל/ת בית ספר"
+        - "Engineer or designer / מהנדס/ת או מעצב/ת"
+        - "Education policy / מדיניות חינוך"
+        - "Other / אחר"
+    validations:
+      required: false
+  - type: textarea
+    id: feedback
+    attributes:
+      label: "Your feedback / המשוב שלכם"
+      description: "Write in whichever language is most comfortable for you — Hebrew, Arabic, or English."
+      placeholder: "..."
+    validations:
+      required: true

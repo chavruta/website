@@ -1,0 +1,78 @@
+name: "Volunteer School for Pilot / התנדבות בית ספר לפיילוט"
+description: "Volunteer your school to participate in a Chavruta pilot program"
+title: "[Pilot] "
+labels: ["pilot", "school"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for your interest in piloting Chavruta at your school! Please fill in what you can — all fields are optional except the first.
+
+        תודה על העניין בהפעלת פיילוט חברותא בבית הספר שלכם! מלאו מה שתוכלו — כל השדות אופציונליים מלבד הראשון.
+  - type: input
+    id: role
+    attributes:
+      label: "Your role / התפקיד שלך"
+      description: "e.g. Teacher, Principal, Parent, School Admin"
+      placeholder: "e.g. Principal / מנהל/ת"
+    validations:
+      required: true
+  - type: input
+    id: school-name
+    attributes:
+      label: "School name / שם בית הספר"
+      placeholder: "Optional — share if you're comfortable"
+    validations:
+      required: false
+  - type: dropdown
+    id: sector
+    attributes:
+      label: "Education sector / מגזר"
+      options:
+        - "Jewish sector / מגזר יהודי"
+        - "Arab sector / מגזר ערבי"
+        - "Other / אחר"
+    validations:
+      required: false
+  - type: dropdown
+    id: region
+    attributes:
+      label: "Region / אזור"
+      options:
+        - "North / צפון"
+        - "Center / מרכז"
+        - "South / דרום"
+        - "Jerusalem / ירושלים"
+        - "Other / אחר"
+    validations:
+      required: false
+  - type: input
+    id: grade-levels
+    attributes:
+      label: "Grade levels / שכבות גיל"
+      placeholder: "e.g. Grades 3-6, or Grades 9-12"
+    validations:
+      required: false
+  - type: textarea
+    id: current-situation
+    attributes:
+      label: "Current remote learning situation / מצב הלמידה מרחוק הנוכחי"
+      description: "What's working? What's failing? How are students and teachers coping?"
+      placeholder: "Tell us about your experience..."
+    validations:
+      required: false
+  - type: textarea
+    id: device-access
+    attributes:
+      label: "Device access / גישה למכשירים"
+      description: "Do most students have access to a smartphone or tablet? Are there significant gaps?"
+      placeholder: "e.g. Most students have smartphones, but ~20% share a device with siblings"
+    validations:
+      required: false
+  - type: textarea
+    id: additional
+    attributes:
+      label: "Anything else / משהו נוסף"
+      description: "Questions, concerns, or anything you'd like us to know"
+    validations:
+      required: false

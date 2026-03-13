@@ -1,0 +1,41 @@
+name: "Feature Request / בקשת פיצ'ר"
+description: "Suggest an idea or improvement for Chavruta"
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have an idea for how Chavruta could work better? We'd love to hear it — whether it's about the website, the proposed platform, the educational model, or anything else.
+
+        יש לכם רעיון איך חברותא יכולה לעבוד טוב יותר? נשמח לשמוע — בין אם זה על האתר, הפלטפורמה המוצעת, המודל החינוכי, או כל דבר אחר.
+  - type: dropdown
+    id: area
+    attributes:
+      label: "Area / תחום"
+      options:
+        - "Website / אתר"
+        - "Educational model / מודל חינוכי"
+        - "AI tutoring / תגבור AI"
+        - "Peer mentorship / חונכות עמיתים"
+        - "Teacher tools / כלים למורים"
+        - "Accessibility / נגישות"
+        - "Localization / תרגום ושפות"
+        - "Other / אחר"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: "Describe your idea / תארו את הרעיון"
+      description: "What problem does this solve? Who benefits?"
+      placeholder: "I think it would be helpful if..."
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: "Additional context / הקשר נוסף"
+      description: "Links, examples, screenshots, or anything else that helps explain the idea"
+    validations:
+      required: false

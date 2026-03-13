@@ -1,0 +1,64 @@
+name: "Content Contribution / תרומת תוכן"
+description: "Share curriculum materials, educational resources, or pedagogical insights"
+title: "[Content] "
+labels: ["content", "curriculum"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Help us build the knowledge base for AI tutoring. We're looking for Bagrut-aligned materials, study guides, pedagogical insights, or links to existing resources.
+
+        עזרו לנו לבנות את בסיס הידע לתגבור ה-AI. אנחנו מחפשים חומרי בגרות, מדריכי למידה, תובנות פדגוגיות או קישורים למשאבים קיימים.
+  - type: dropdown
+    id: content-type
+    attributes:
+      label: "Type of content / סוג התוכן"
+      options:
+        - "Bagrut study materials / חומרי בגרות"
+        - "Practice questions or exams / שאלות תרגול או מבחנים"
+        - "Teaching methodology / מתודולוגיית הוראה"
+        - "Link to existing resource / קישור למשאב קיים"
+        - "Other / אחר"
+    validations:
+      required: true
+  - type: input
+    id: subject
+    attributes:
+      label: "Subject area / תחום לימוד"
+      placeholder: "e.g. Mathematics, History, Arabic, English"
+    validations:
+      required: false
+  - type: input
+    id: grade-level
+    attributes:
+      label: "Grade level / שכבת גיל"
+      placeholder: "e.g. Grade 10, Grades 2-5"
+    validations:
+      required: false
+  - type: dropdown
+    id: language
+    attributes:
+      label: "Language / שפה"
+      options:
+        - "Hebrew / עברית"
+        - "Arabic / عربية"
+        - "English / אנגלית"
+        - "Multiple / מספר שפות"
+    validations:
+      required: false
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description / תיאור"
+      description: "Describe the content, paste links, or attach files"
+      placeholder: "What are you contributing and how might it be used?"
+    validations:
+      required: true
+  - type: textarea
+    id: licensing
+    attributes:
+      label: "Licensing / רישוי"
+      description: "Can this content be freely shared? Any restrictions we should know about?"
+      placeholder: "e.g. Public domain, Creative Commons, Ministry of Education materials"
+    validations:
+      required: false
