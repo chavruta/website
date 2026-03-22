@@ -19,9 +19,10 @@ The project was born in March 2026 during the Israel-Iran war, when schools clos
 ## Technical Architecture
 
 ### Current State
-- Single-page static site (`index.html`) with trilingual Hebrew/English/Arabic toggle
-- Hosted on GitHub Pages with custom domain (chavruta.org.il)
-- No build tools, no framework — pure HTML/CSS/JS
+- Astro static site with trilingual Hebrew/English/Arabic toggle
+- Hosted on Vercel with custom domain (chavruta.org.il)
+- Built with Astro 6, TypeScript, pnpm
+- Content separated into typed language files (`src/content/he.ts`, `en.ts`, `ar.ts`)
 - Hebrew is the default language
 - Forced light mode (dark mode explicitly blocked via `color-scheme: light only`)
 
@@ -119,28 +120,47 @@ This is a bottom-up, community-driven project. The philosophy:
 ## File Structure (Current)
 ```
 /
-├── index.html                          # Main trilingual site (Hebrew default)
+├── astro.config.mjs                    # Astro config (site URL, static output)
+├── package.json                        # pnpm project config
+├── tsconfig.json                       # TypeScript config (extends astro/strict)
 ├── CLAUDE.md                           # This file
 ├── README.md                           # Project overview and contribution guide
-├── .github/
-│   └── ISSUE_TEMPLATE/                 # GitHub issue form templates
-│       ├── config.yml                  # Template chooser config + WhatsApp link
-│       ├── school-pilot.yml            # School pilot volunteer form
-│       ├── content-contribution.yml    # Curriculum/content contribution form
-│       ├── feature-request.yml         # Feature request form
-│       └── general-feedback.yml        # General feedback form
-├── .claude/
-│   └── commands/
-│       └── ship.md                     # /ship deployment command
-└── assets/                             # (future) images, icons, etc.
+├── public/
+│   └── assets/
+│       ├── favicon/                    # Favicons (ico, svg, png, apple-touch)
+│       └── og-image.png               # Open Graph social sharing image
+├── src/
+│   ├── pages/
+│   │   └── index.astro                # Main page — renders all three language sections
+│   ├── layouts/
+│   │   └── Layout.astro               # Root layout (head, meta, fonts, lang toggle)
+│   ├── components/
+│   │   └── LangSection.astro          # Reusable language section component
+│   ├── content/
+│   │   ├── types.ts                   # LangContent TypeScript interface
+│   │   ├── he.ts                      # Hebrew content
+│   │   ├── en.ts                      # English content
+│   │   └── ar.ts                      # Arabic content
+│   ├── scripts/
+│   │   └── lang-toggle.ts             # Client-side language switching logic
+│   └── styles/
+│       └── global.css                 # Global styles, design tokens, RTL support
+└── .github/
+    └── ISSUE_TEMPLATE/                 # GitHub issue form templates
+        ├── config.yml                  # Template chooser config + WhatsApp link
+        ├── school-pilot.yml            # School pilot volunteer form
+        ├── content-contribution.yml    # Curriculum/content contribution form
+        ├── feature-request.yml         # Feature request form
+        └── general-feedback.yml        # General feedback form
 ```
 
 ## Development Notes
-- No build step currently — just static HTML served by GitHub Pages
+- `pnpm dev` to run locally, `pnpm build` to build static output to `dist/`
+- Deployed to Vercel (auto-deploys from main branch)
 - Google Fonts loaded via CDN (DM Serif Display, DM Sans, Frank Ruhl Libre, Heebo, IBM Plex Sans Arabic)
-- Language toggle is client-side JS, no server required
-- All content is self-contained in the single HTML file
-- When adding complexity, consider: Next.js or Astro for static generation, deployed to Vercel (where Edoe hosts other projects)
+- Language toggle is client-side TypeScript (`src/scripts/lang-toggle.ts`), no server required
+- Content is separated into typed language files for maintainability — edit content in `src/content/`
+- The `/ship` command (in repo root `.claude/commands/ship.md`) handles review, build, and push
 
 ## Links & References
 - [JTA article on Zoom learning failure (March 2026)](https://www.jta.org/2026/03/10/israel/workplaces-open-schools-remain-shut-and-israeli-parents-pull-out-their-hair-over-wartime-zoom-classes)

@@ -1,0 +1,96 @@
+---
+import type { LangContent } from '../content/types';
+
+interface Props {
+  lang: string;
+  content: LangContent;
+  isDefault?: boolean;
+}
+
+const FORM_URL = 'https://forms.gle/hziLtmJYyiqWpH5u8';
+const { lang, content, isDefault = false } = Astro.props;
+
+const sectionClass = `section-${lang}${isDefault ? ' visible' : ''}`;
+const heroClass = lang === 'en' ? 'hero' : `hero hero-${lang}`;
+const contentClass = lang === 'en' ? 'content' : `content content-${lang}`;
+const mainId = isDefault ? 'main-content' : `main-content-${lang}`;
+---
+
+<div class={sectionClass} id={mainId}>
+  <div class={heroClass}>
+    <div class="hero-content">
+      <div class="label">{content.hero.label}</div>
+      <h1>{content.hero.heading}</h1>
+      <p class="subtitle">{content.hero.subtitle}</p>
+    </div>
+  </div>
+
+  <div class={contentClass}>
+    <h2>{content.problem.heading}</h2>
+    {content.problem.paragraphs.map(p => <p set:html={p} />)}
+
+    <div class="highlight-box">
+      <p>{content.highlight}</p>
+    </div>
+
+    <h2>{content.whyChavruta.heading}</h2>
+    {content.whyChavruta.paragraphs.map(p => <p set:html={p} />)}
+
+    <h2>{content.whyNow.heading}</h2>
+    {content.whyNow.paragraphs.map(p => <p set:html={p} />)}
+
+    <div class="mid-cta">
+      <p>{content.midCta.text}</p>
+      <a href={FORM_URL} target="_blank" rel="noopener noreferrer" class="mid-cta-button">{content.midCta.buttonLabel}</a>
+    </div>
+
+    <h2>{content.pillarsHeading}</h2>
+    {content.pillars.map((pillar, i) => (
+      <div class="pillar">
+        <div class="pillar-num">{i + 1}</div>
+        <h3>{pillar.title}</h3>
+        <p>{pillar.body}</p>
+      </div>
+    ))}
+
+    <h2>{content.whyBetter.heading}</h2>
+    {content.whyBetter.paragraphs.map(p => <p set:html={p} />)}
+
+    <h2>{content.curriculum.heading}</h2>
+    <p>{content.curriculum.paragraph}</p>
+
+    <h2>{content.deviceAccess.heading}</h2>
+    <p>{content.deviceAccess.paragraph}</p>
+
+    <h2>{content.pilot.heading}</h2>
+    <p>{content.pilot.paragraph}</p>
+
+    <div class="timeline">
+      {content.timeline.map(item => (
+        <div class="timeline-item">
+          <div class="day">{item.day}</div>
+          <p>{item.description}</p>
+        </div>
+      ))}
+    </div>
+
+    <h2>{content.beyondWar.heading}</h2>
+    <p>{content.beyondWar.paragraph}</p>
+
+    <div class="cta-box">
+      <h2>{content.ctaBox.heading}</h2>
+      <p>{content.ctaBox.description}</p>
+      <ul class="cta-list">
+        {content.ctaBox.items.map(item => <li>{item}</li>)}
+      </ul>
+      <p>{content.ctaBox.closing}</p>
+      <a href={FORM_URL} target="_blank" rel="noopener noreferrer" class="cta-button">{content.ctaBox.buttonLabel}</a>
+    </div>
+
+    <div class="footer-note">
+      <p>{content.footer.date}</p>
+      <p style="margin-top: 8px; font-size: 14px; color: var(--navy);"><strong>{content.footer.name}</strong></p>
+      <p><a href={`mailto:${content.footer.email}`} style="color: var(--blue);">{content.footer.email}</a> · {content.footer.phone}</p>
+    </div>
+  </div>
+</div>

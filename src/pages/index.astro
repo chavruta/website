@@ -1,0 +1,13 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LangSection from '../components/LangSection.astro';
+import { en } from '../content/en';
+import { he } from '../content/he';
+import { ar } from '../content/ar';
+---
+
+<Layout>
+  <LangSection lang="en" content={en} />
+  <LangSection lang="he" content={he} isDefault={true} />
+  <LangSection lang="ar" content={ar} />
+</Layout>
